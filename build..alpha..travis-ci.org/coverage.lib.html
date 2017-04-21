@@ -1,0 +1,1331 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-npmtest-node-workflow/node_modules/node-workflow/lib/runner.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-node-workflow">npmtest-node-workflow (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-node-workflow/node_modules/node-workflow/lib/runner.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">7.65% <small>(13 / 170)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 84)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 48)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">7.65% <small>(13 / 170)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-node-workflow/node_modules/node-workflow/lib/</a> &#187; runner.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// Copyright 2012 Pedro P. Candel &lt;kusorbox@gmail.com&gt; All rights reserved.
+var util = require('util'),
+    uuid = require('node-uuid'),
+    fs = require('fs'),
+    path = require('path'),
+    async = require('async'),
+    Logger = require('bunyan'),
+    WorkflowJobRunner = require('./job-runner');
+&nbsp;
+// - opts - configuration options:
+//    - identifier: Unique identifier for this runner.
+//    - forks: Max number of child processes to fork at the same time.
+//    - run_interval: Check for new jobs every 'run_interval' seconds.
+//                    (By default, every 2 minutes).
+//    - sandbox: Collection of node modules to pass to the sandboxed tasks
+//               execution. Object with the form:
+//               {
+//                  'module_global_var_name': 'node-module-name'
+//               }
+//               By default, only the global timeouts are passed to the tasks
+//               sandbox.
+var WorkflowRunner = module.exports = <span class="fstat-no" title="function not covered" >function (opts) {</span>
+<span class="cstat-no" title="statement not covered" >  if (typeof (opts) !== 'object') {</span>
+<span class="cstat-no" title="statement not covered" >    throw new TypeError('opts (Object) required');</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (typeof (opts.backend) !== 'object') {</span>
+<span class="cstat-no" title="statement not covered" >    throw new TypeError('opts.backend (Object) required');</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (typeof (opts.runner) !== 'object') {</span>
+<span class="cstat-no" title="statement not covered" >    opts.runner = {};</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  var Backend = require(opts.backend.module);</span>
+<span class="cstat-no" title="statement not covered" >  this.backend = new Backend(opts.backend.opts);</span>
+<span class="cstat-no" title="statement not covered" >  this.identifier = opts.runner.identifier || null;</span>
+<span class="cstat-no" title="statement not covered" >  this.forks = opts.runner.forks || 10;</span>
+<span class="cstat-no" title="statement not covered" >  this.run_interval = (opts.runner.run_interval || 2) * 1000;</span>
+<span class="cstat-no" title="statement not covered" >  this.interval = null;</span>
+<span class="cstat-no" title="statement not covered" >  this.shutting_down = false;</span>
+<span class="cstat-no" title="statement not covered" >  this.child_processes = [];</span>
+<span class="cstat-no" title="statement not covered" >  this.sandbox = opts.runner.sandbox || {};</span>
+<span class="cstat-no" title="statement not covered" >  this.trace = opts.runner.trace || false;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (!opts.logger) {</span>
+<span class="cstat-no" title="statement not covered" >    opts.logger = {};</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  opts.logger.name = 'workflow-runner';</span>
+<span class="cstat-no" title="statement not covered" >  opts.logger.serializers = {</span>
+    err: Logger.stdSerializers.err
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  opts.logger.streams = opts.logger.streams || [ {</span>
+    level: 'info',
+    stream: process.stdout
+  }];
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  opts.logger.runner_uuid = this.identifier;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  this.log = new Logger(opts.logger);</span>
+};
+&nbsp;
+WorkflowRunner.prototype.init = <span class="fstat-no" title="function not covered" >function (callback) {</span>
+<span class="cstat-no" title="statement not covered" >  var self = this,</span>
+      series = [];
+  // Using async.series we can kind of write this sequentially and run some
+  // methods only when needed:
+&nbsp;
+  // 1) We need an unique identifier for this runner, also something
+  //    human friendly to identify the runner from a bunch of them would be
+  //    helpful.
+<span class="cstat-no" title="statement not covered" >  if (!self.identifier) {</span>
+<span class="cstat-no" title="statement not covered" >    series.push(<span class="fstat-no" title="function not covered" >function (cb) {</span></span>
+<span class="cstat-no" title="statement not covered" >      self.getIdentifier(<span class="fstat-no" title="function not covered" >function (err, uuid) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (err) {</span>
+<span class="cstat-no" title="statement not covered" >          return cb(err);</span>
+        }
+<span class="cstat-no" title="statement not covered" >        self.identifier = uuid;</span>
+        // Not that we really care about the return value here, anyway:
+<span class="cstat-no" title="statement not covered" >        return cb(null, uuid);</span>
+      });
+    });
+  }
+  // The runner will register itself on the backend, with its unique id.
+<span class="cstat-no" title="statement not covered" >  series.push(<span class="fstat-no" title="function not covered" >function (cb) {</span></span>
+<span class="cstat-no" title="statement not covered" >    self.backend.registerRunner(self.identifier, <span class="fstat-no" title="function not covered" >function (err) {</span></span>
+<span class="cstat-no" title="statement not covered" >      if (err) {</span>
+<span class="cstat-no" title="statement not covered" >        return cb(err);</span>
+      }
+<span class="cstat-no" title="statement not covered" >      return cb(null, null);</span>
+    });
+  });
+  // 2) On init, the runner will check for any job flagged as running with
+  //    the runner identifier. This means a previous failure so, first thing
+  //    will be take care of such failure.
+  //    NOTE: It would be desirable to "hide" the next queued Job to the
+  //    other runners when we fetch it for the current one.
+<span class="cstat-no" title="statement not covered" >  self.backend.init(<span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >    async.series(series, <span class="fstat-no" title="function not covered" >function (err, results) {</span></span>
+      // Note we don't care at all about the results.
+<span class="cstat-no" title="statement not covered" >      if (err) {</span>
+<span class="cstat-no" title="statement not covered" >        return callback(err);</span>
+      }
+<span class="cstat-no" title="statement not covered" >      return callback();</span>
+    });
+  });
+};
+&nbsp;
+// Wait for children to finish, do not began any other child process.
+// Call callback on done.
+WorkflowRunner.prototype.quit = <span class="fstat-no" title="function not covered" >function (callback) {</span>
+<span class="cstat-no" title="statement not covered" >  var self = this;</span>
+<span class="cstat-no" title="statement not covered" >  self.shutting_down = true;</span>
+<span class="cstat-no" title="statement not covered" >  clearInterval(self.interval);</span>
+<span class="cstat-no" title="statement not covered" >  if (Object.keys(self.child_processes).length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >    process.nextTick(<span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >      self.quit(callback);</span>
+    });
+  } else {
+<span class="cstat-no" title="statement not covered" >    callback();</span>
+  }
+};
+&nbsp;
+// This is the main runner method, where jobs execution takes place.
+// Every call to this method will result into a child_process being forked.
+WorkflowRunner.prototype.runJob = <span class="fstat-no" title="function not covered" >function (job, callback) {</span>
+<span class="cstat-no" title="statement not covered" >  var self = this,</span>
+  wf_job_runner = new WorkflowJobRunner({
+    runner: self,
+    backend: self.backend,
+    job: job,
+    trace: self.trace,
+    sandbox: self.sandbox
+  });
+<span class="cstat-no" title="statement not covered" >  wf_job_runner.run(callback);</span>
+};
+&nbsp;
+WorkflowRunner.prototype.getIdentifier = <span class="fstat-no" title="function not covered" >function (callback) {</span>
+<span class="cstat-no" title="statement not covered" >  var cfg_file = path.resolve(__dirname, '../workflow-indentifier');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  path.exists(cfg_file, <span class="fstat-no" title="function not covered" >function (exist) {</span></span>
+<span class="cstat-no" title="statement not covered" >    if (exist) {</span>
+<span class="cstat-no" title="statement not covered" >      fs.readFile(cfg_file, 'utf-8', <span class="fstat-no" title="function not covered" >function (err, data) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (err) {</span>
+<span class="cstat-no" title="statement not covered" >          return callback(err);</span>
+        }
+<span class="cstat-no" title="statement not covered" >        return callback(null, data);</span>
+      });
+    } else {
+<span class="cstat-no" title="statement not covered" >      var id = uuid();</span>
+<span class="cstat-no" title="statement not covered" >      fs.writeFile(cfg_file, id, 'utf-8', <span class="fstat-no" title="function not covered" >function (err) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (err) {</span>
+<span class="cstat-no" title="statement not covered" >          return callback(err);</span>
+        }
+<span class="cstat-no" title="statement not covered" >        return callback(null, id);</span>
+      });
+    }
+  });
+};
+&nbsp;
+WorkflowRunner.prototype.runNow = <span class="fstat-no" title="function not covered" >function (job) {</span>
+<span class="cstat-no" title="statement not covered" >  return (new Date().getTime() &gt;= new Date(job.exec_after).getTime());</span>
+};
+&nbsp;
+// Just in case we need to kill it without leaving child processes around:
+WorkflowRunner.prototype.kill = <span class="fstat-no" title="function not covered" >function (callback) {</span>
+<span class="cstat-no" title="statement not covered" >  var self = this;</span>
+<span class="cstat-no" title="statement not covered" >  self.shutting_down = true;</span>
+<span class="cstat-no" title="statement not covered" >  clearInterval(self.interval);</span>
+<span class="cstat-no" title="statement not covered" >  if (Object.keys(self.child_processes).length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >    Object.keys(self.child_processes).forEach(<span class="fstat-no" title="function not covered" >function (p) {</span></span>
+<span class="cstat-no" title="statement not covered" >      process.kill(p, 'SIGKILL');</span>
+    });
+<span class="cstat-no" title="statement not covered" >    self.child_processes = [];</span>
+  }
+<span class="cstat-no" title="statement not covered" >  if (callback) {</span>
+<span class="cstat-no" title="statement not covered" >    callback();</span>
+  }
+};
+&nbsp;
+&nbsp;
+WorkflowRunner.prototype.run = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >  var self = this,</span>
+  // Queue worker. Tries to run a job, including "hiding" it from other
+  // runners:
+  worker = <span class="fstat-no" title="function not covered" >function (uuid, callback) {</span>
+<span class="cstat-no" title="statement not covered" >    self.backend.getJob(uuid, <span class="fstat-no" title="function not covered" >function (err, job) {</span></span>
+<span class="cstat-no" title="statement not covered" >      if (err) {</span>
+<span class="cstat-no" title="statement not covered" >        callback(err);</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (self.runNow(job)) {</span>
+<span class="cstat-no" title="statement not covered" >        self.backend.runJob(uuid, self.identifier, <span class="fstat-no" title="function not covered" >function (err, job) {</span></span>
+<span class="cstat-no" title="statement not covered" >          if (err) {</span>
+<span class="cstat-no" title="statement not covered" >            callback(err);</span>
+          }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >          if (self.trace) {</span>
+<span class="cstat-no" title="statement not covered" >            console.time('JOB ' + job.uuid);</span>
+          }
+<span class="cstat-no" title="statement not covered" >          self.runJob(job, <span class="fstat-no" title="function not covered" >function (err) {</span></span>
+<span class="cstat-no" title="statement not covered" >            if (self.trace) {</span>
+<span class="cstat-no" title="statement not covered" >              console.timeEnd('JOB ' + job.uuid);</span>
+            }
+<span class="cstat-no" title="statement not covered" >            if (err) {</span>
+<span class="cstat-no" title="statement not covered" >              callback(err);</span>
+            }
+<span class="cstat-no" title="statement not covered" >            callback();</span>
+          });
+        });
+      }
+    });
+  },
+  // We keep a queue with concurrency limit where we'll be pushing new jobs
+  queue = async.queue(worker, self.forks);
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  self.interval = setInterval(<span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >    self.backend.runnerActive(self.identifier, <span class="fstat-no" title="function not covered" >function (err) {</span></span>
+<span class="cstat-no" title="statement not covered" >      if (err) {</span>
+<span class="cstat-no" title="statement not covered" >        self.log.error(err, 'Error reporting runner activity');</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+      }
+<span class="cstat-no" title="statement not covered" >      self.backend.isRunnerIdle(self.identifier, <span class="fstat-no" title="function not covered" >function (idle) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (idle === false) {</span>
+<span class="cstat-no" title="statement not covered" >          async.parallel({</span>
+            // Fetch stale jobs from runners which stopped reporting
+            // activity and cancel them:
+            stale_jobs: <span class="fstat-no" title="function not covered" >function (cb) {</span>
+<span class="cstat-no" title="statement not covered" >              self.staleJobs(<span class="fstat-no" title="function not covered" >function (err, jobs) {</span></span>
+<span class="cstat-no" title="statement not covered" >                if (err) {</span>
+<span class="cstat-no" title="statement not covered" >                  self.log.error(err, 'Error fetching stale jobs');</span>
+                  // We will not stop even on error:
+<span class="cstat-no" title="statement not covered" >                  return cb(null, null);</span>
+                }
+<span class="cstat-no" title="statement not covered" >                return async.forEach(jobs, <span class="fstat-no" title="function not covered" >function (uuid, fe_cb) {</span></span>
+<span class="cstat-no" title="statement not covered" >                  self.backend.updateJobProperty(</span>
+                    uuid, 'execution', 'canceled',
+<span class="fstat-no" title="function not covered" >                    function (err) {</span>
+<span class="cstat-no" title="statement not covered" >                      if (err) {</span>
+<span class="cstat-no" title="statement not covered" >                        return fe_cb(err);</span>
+                      }
+<span class="cstat-no" title="statement not covered" >                      return self.backend.getJob(uuid, <span class="fstat-no" title="function not covered" >function (err, job) {</span></span>
+<span class="cstat-no" title="statement not covered" >                        if (err) {</span>
+<span class="cstat-no" title="statement not covered" >                          return fe_cb(err);</span>
+                        }
+<span class="cstat-no" title="statement not covered" >                        return self.backend.finishJob(job, <span class="fstat-no" title="function not covered" >function (err, job) {</span></span>
+<span class="cstat-no" title="statement not covered" >                          if (err) {</span>
+<span class="cstat-no" title="statement not covered" >                            return fe_cb(err);</span>
+                          }
+<span class="cstat-no" title="statement not covered" >                          self.log.info('Stale Job ' + job.uuid + ' canceled');</span>
+<span class="cstat-no" title="statement not covered" >                          return fe_cb(null);</span>
+                        });
+                      });
+                    });
+                }, <span class="fstat-no" title="function not covered" >function (err) {</span>
+<span class="cstat-no" title="statement not covered" >                  return cb(null, null);</span>
+                });
+              });
+            },
+            // Fetch jobs to process.
+            fetch_jobs: <span class="fstat-no" title="function not covered" >function (cb) {</span>
+<span class="cstat-no" title="statement not covered" >              var fetch = self.forks - Object.keys(self.child_processes).length;</span>
+<span class="cstat-no" title="statement not covered" >              self.backend.nextJobs(0, fetch - 1, <span class="fstat-no" title="function not covered" >function (err, jobs) {</span></span>
+                // Error fetching jobs
+<span class="cstat-no" title="statement not covered" >                if (err) {</span>
+<span class="cstat-no" title="statement not covered" >                  self.log.error(err, 'Error fetching jobs');</span>
+                  // We will not stop even on error:
+<span class="cstat-no" title="statement not covered" >                  return cb(null, null);</span>
+                }
+                // No queued jobs
+<span class="cstat-no" title="statement not covered" >                if (!jobs) {</span>
+<span class="cstat-no" title="statement not covered" >                  self.log.info('No jobs queued');</span>
+<span class="cstat-no" title="statement not covered" >                  return cb(null, null);</span>
+                }
+                // Got jobs, let's see if we can run them:
+<span class="cstat-no" title="statement not covered" >                jobs.forEach(<span class="fstat-no" title="function not covered" >function (job) {</span></span>
+<span class="cstat-no" title="statement not covered" >                  queue.push(job, <span class="fstat-no" title="function not covered" >function (err) {</span></span>
+                    // Called once queue worker finished processing the job
+<span class="cstat-no" title="statement not covered" >                    if (err) {</span>
+<span class="cstat-no" title="statement not covered" >                      self.log.error(err, 'Error running job');</span>
+                    }
+<span class="cstat-no" title="statement not covered" >                    self.log.info('Job with uuid ' + job + ' ran successfully');</span>
+                  });
+                });
+<span class="cstat-no" title="statement not covered" >                return cb(null, null);</span>
+              });
+&nbsp;
+            }
+          }, <span class="fstat-no" title="function not covered" >function (err, results) {</span>
+<span class="cstat-no" title="statement not covered" >            return;</span>
+          });
+        } else {
+<span class="cstat-no" title="statement not covered" >          self.log.info('Runner idle.');</span>
+        }
+      });
+    });
+  }, self.run_interval);
+};
+&nbsp;
+&nbsp;
+WorkflowRunner.prototype.childUp = <span class="fstat-no" title="function not covered" >function (job_uuid, child_pid) {</span>
+<span class="cstat-no" title="statement not covered" >  var self = this;</span>
+<span class="cstat-no" title="statement not covered" >  self.child_processes[child_pid] = job_uuid;</span>
+};
+&nbsp;
+WorkflowRunner.prototype.childDown = <span class="fstat-no" title="function not covered" >function (job_uuid, child_pid) {</span>
+<span class="cstat-no" title="statement not covered" >  var self = this;</span>
+<span class="cstat-no" title="statement not covered" >  delete self.child_processes[child_pid];</span>
+};
+&nbsp;
+// Check for inactive runners.
+// "Inactive runner" - a runner with latest status report older than
+//  3 times the runners' run_interval.
+//  - callback - f(err, runners): `err` always means backend error.
+//    `runners` will be an array, even empty.
+WorkflowRunner.prototype.inactiveRunners = <span class="fstat-no" title="function not covered" >function (callback) {</span>
+<span class="cstat-no" title="statement not covered" >  var self = this,</span>
+      inactiveRunners = [];
+<span class="cstat-no" title="statement not covered" >  self.backend.getRunners(<span class="fstat-no" title="function not covered" >function (err, runners) {</span></span>
+<span class="cstat-no" title="statement not covered" >    if (err) {</span>
+<span class="cstat-no" title="statement not covered" >      return callback(err);</span>
+    }
+<span class="cstat-no" title="statement not covered" >    Object.keys(runners).forEach(<span class="fstat-no" title="function not covered" >function (id) {</span></span>
+<span class="cstat-no" title="statement not covered" >      var outdated = new Date().getTime() - (self.run_interval * 3000);</span>
+<span class="cstat-no" title="statement not covered" >      if (</span>
+        id !== self.identifier &amp;&amp;
+        new Date(runners[id]).getTime() &lt; outdated) {
+<span class="cstat-no" title="statement not covered" >        inactiveRunners.push(id);</span>
+      }
+    });
+<span class="cstat-no" title="statement not covered" >    return callback(null, inactiveRunners);</span>
+  });
+};
+&nbsp;
+&nbsp;
+// Check for "stale" jobs, i.e, associated with inactive runners.
+// - callback(err, jobs): `err` means backend error.
+//   `jobs` will be an array, even empty. Note this will be an
+//   array of jobs UUIDs, so they can be canceled.
+WorkflowRunner.prototype.staleJobs = <span class="fstat-no" title="function not covered" >function (callback) {</span>
+<span class="cstat-no" title="statement not covered" >  var self = this,</span>
+      staleJobs = [];
+<span class="cstat-no" title="statement not covered" >  self.inactiveRunners(<span class="fstat-no" title="function not covered" >function (err, runners) {</span></span>
+<span class="cstat-no" title="statement not covered" >    if (err) {</span>
+<span class="cstat-no" title="statement not covered" >      return callback(err);</span>
+    }
+<span class="cstat-no" title="statement not covered" >    if (runners.length === 0) {</span>
+<span class="cstat-no" title="statement not covered" >      return callback(null, staleJobs);</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      return async.forEach(runners, <span class="fstat-no" title="function not covered" >function (runner, cb) {</span></span>
+<span class="cstat-no" title="statement not covered" >        self.backend.getRunnerJobs(runner, <span class="fstat-no" title="function not covered" >function (err, jobs) {</span></span>
+<span class="cstat-no" title="statement not covered" >          if (err) {</span>
+<span class="cstat-no" title="statement not covered" >            cb(err);</span>
+          }
+<span class="cstat-no" title="statement not covered" >          staleJobs = staleJobs.concat(jobs);</span>
+<span class="cstat-no" title="statement not covered" >          cb();</span>
+        });
+      }, <span class="fstat-no" title="function not covered" >function (err) {</span>
+<span class="cstat-no" title="statement not covered" >        if (err) {</span>
+<span class="cstat-no" title="statement not covered" >          return callback(err);</span>
+        }
+<span class="cstat-no" title="statement not covered" >        return callback(null, staleJobs);</span>
+      });
+    }
+  });
+};
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Fri Apr 21 2017 16:05:58 GMT+0000 (UTC)</div>
+</div>
+</body>
+</html>
